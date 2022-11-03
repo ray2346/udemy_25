@@ -1,17 +1,52 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const restorantData = {
+    menu: [
+        {
+            name: 'Salad Caesar',
+            price: '14$'
+        },
+        {
+            name: 'Pizza Diavola',
+            price: '9$'
+        },
+        {
+            name: 'Beefsteak',
+            price: '17$'
+        },
+        {
+            name: 'Napoleon',
+            price: '7$'
+        }
+    ],
+    waitors: [
+        {name: 'Alice', age: 22}, {name: 'John', age: 24}
+    ],
+    averageLunchPrice: '20$',
+    openNow: true
+};
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function isOpen(prop) {
+    let answer = '';
+    prop === true ? answer = 'Открыто' : answer = 'Закрыто';
+   return answer
+}
+console.log(isOpen(restorantData.openNow))
+
+function isAverageLunchPriceTrue(fDish, sDish, average) {
+    if ((fDish.price.slice(0, -1) + sDish.price.slice(0, -1))> average ) {
+        return 'Цена ниже средней';
+    } else {
+        return 'Цена выше средней';
+    }
+}
+console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+
+function transferWaitors(data) {
+    const copy = JSON.parse(JSON.stringify(data))
+    copy.waitors[3] = { name: 'Mike', age: 32 }
+
+    return copy;
+}
+
+console.log(restorantData);
+console.log(transferWaitors(restorantData));
